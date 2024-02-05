@@ -133,14 +133,7 @@ def merge_sort(tamanho, nums):
         j += 1
     
     for n in range(l,r+1):
-      if nums[n] < aux[n-l]:
-        for y in range(profundidade-aux[n-l],profundidade-nums[n]):
-          set_pixel(n,y)
-      else:
-        for y in range(profundidade-nums[n],profundidade-aux[n-l]):
-          set_pixel(n,y,branco)
-      show_screen()
-      nums[n] = aux[n-l]
+      substitui(n, n-l, nums, aux)
 
   def sort(l,r):
     if r-l+1 >= 2:
@@ -195,14 +188,47 @@ def heap_sort(tamanho, nums):
     heapify(i, nums, 0)
 
 
+
+def radix_sort(tamanho, nums):
+  
+  def counting_sort(tamanho, nums, exp): 
+    aux = [0]* tamanho
+    count = [0]*10 
+
+    for i in range(0, tamanho): 
+      index = int((nums[i] / exp) % 10)
+      count[index] += 1
+   
+    carry = count [0]
+    count[0] = 0
+    for i in range(1,10): 
+      carry += count[i]
+      count[i] = carry - count[i]
+   
+    for i in range(tamanho):
+      index = int((nums[i] / exp) % 10) 
+      aux[count[index]] = nums[i] 
+      count[index] += 1
+   
+    for i in range(0,tamanho): 
+      substitui(i, aux[i], nums)
+ 
+
+  exp = 1
+  while 192 // exp > 0:
+    counting_sort(tamanho, nums, exp)
+    exp *= 10
+
+
+
 # def bongo_sort(tamanho, nums):
 # def odd_even_sort(tamanho, nums):
-# def radix_sort(tamanho, nums):
 # def bitonic_sort(tamanho, nums):
 
 sorting_algs = {1:bubble_sort, 2:cocktail_sort, 3:selection_sort, 
                 4:insertion_sort, 5:shell_sort, 6:quick_sort, 
-                7:merge_sort, 8:comb_sort, 9:heap_sort}
+                7:merge_sort, 8:comb_sort, 9:heap_sort,
+                10:radix_sort}
 
 def sort(alg, tamanho, nums):
   sorting_alg = sorting_algs[alg]

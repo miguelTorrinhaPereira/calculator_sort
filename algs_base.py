@@ -21,6 +21,17 @@ def troca_thick(n1, n2, nums):
   show_screen()
 
 
+def substitui(n1, new, nums):
+  if nums[n1] < new:
+    for y in range(profundidade-new,profundidade-nums[n1]):
+      set_pixel(n1,y)
+  else:
+    for y in range(profundidade-nums[n1],profundidade-new):
+      set_pixel(n1,y,branco)
+  show_screen()
+  nums[n1] = new 
+
+
 def espera(n):
   for i in range(n*100):
     i += 1

@@ -7,8 +7,7 @@ from sorting_algs import sort  # os algoritmos de ordenacao
 
 # input
 alg = int(input('alg? '))
-modo = input('modo? ')
-
+modo = input('mode? ')
 
 # estes valores sao ajustados dependendo do algoritmo para que os mais lentos demorem o mesmo que os rapidos
 tamanho = base_tamanho
@@ -17,14 +16,11 @@ if alg > alg_cutout:
   tamanho *= tamanho_factor
   shuffels *= shuffel_factor
 
-
 # gera a lista de numeros
 nums = gen_nums(modo, tamanho, shuffels)
 
-
 # desenha a lista de numeros
 draw(alg, tamanho, nums)
-
 
 # ordena 
 sort(alg, tamanho, nums)
