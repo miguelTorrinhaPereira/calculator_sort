@@ -15,10 +15,7 @@ There are several different algorithms that you can choose. Initially, the progr
 - 7 - Merge sort
 - 8 - Comb sort
 - 9 - Heap sort
-<<<<<<< HEAD
 - 10 - Radix sort
-=======
->>>>>>> refs/remotes/origin/main
 
 ## modes
 
@@ -27,8 +24,4 @@ After selecting the algorithm, you need to choose the mode. The mode represents 
 - 1 or '' - numbers from 1 to 192 evenly distributed and shuffled
 - 2 - numbers from 1 to 192 randomly distributed
 - 3 - numbers from 1 to 192 evenly distributed and sorted in reverse order
-<<<<<<< HEAD
 - 4 - numbers from 1 to 192 evenly distributed and sorted
-=======
-- 4 - numbers from 1 to 192 evenly distributed and sorted
->>>>>>> refs/remotes/origin/main
