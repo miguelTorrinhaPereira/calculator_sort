@@ -1,10 +1,6 @@
-base_tamanho = 96
-tamanho_factor = 4
+larguras = [64, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1]
 
-base_shuffels = 1000
-shuffel_factor = 3
+base_shuffels = 3072
 
 profundidade = 192
 branco = (255,255,255)
-
-alg_cutout = 2

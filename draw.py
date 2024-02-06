@@ -1,5 +1,5 @@
 from casioplot import set_pixel,show_screen
-from values import profundidade, tamanho_factor, alg_cutout
+from values import profundidade
 
 
 
@@ -10,17 +10,17 @@ def draw_norm(tamanho, nums):
     show_screen()    
 
 
-def draw_thick(tamanho, nums):   
+def draw_thick(tamanho, nums, largura):   
   for n in range(tamanho):
-    n *= tamanho_factor
-    for x in range(tamanho_factor):
-      for y in range(profundidade-nums[n//tamanho_factor],profundidade):
+    n *= largura 
+    for x in range(largura):
+      for y in range(profundidade-nums[n//largura],profundidade):
         set_pixel(n+x,y)
     show_screen()    
     
     
-def draw(alg_escolhido, tamanho, nums):
-  if alg_escolhido <= alg_cutout:
-    draw_thick(tamanho, nums)
-  else:
+def draw(tamanho, nums, largura):
+  if largura == 1:
     draw_norm(tamanho, nums)
+  else:
+    draw_thick(tamanho, nums, largura)

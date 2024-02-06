@@ -1,5 +1,4 @@
 from random import randint
-from values import tamanho_factor
 
 
 def gen_nums_raw(tamanho):
@@ -9,7 +8,8 @@ def gen_nums_raw(tamanho):
       nums += [i,i]
     return nums
   else:
-    return list(range(tamanho_factor//2, 193, tamanho_factor//2))
+    largura = 384 // tamanho
+    return list(range(largura//2, 193, largura//2))
 
 
 def shuffel(tamanho, shuffels, nums):

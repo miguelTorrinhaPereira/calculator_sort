@@ -8,12 +8,18 @@ comb_espera = 6
 
 
 
+def bongo_sort(tamanho, nums):
+  largura = 384 // tamanho
+  pass
+
+
 def bubble_sort(tamanho, nums):
+  largura = 384 // tamanho
   for j in range(tamanho):
     swapped = False
     for i in range(tamanho-j-1):
       if nums[i]>nums[i+1]:
-        troca_thick(i,i+1,nums)
+        troca_thick(i,i+1,nums,largura)
         swapped = True
 
     if not swapped: break 
@@ -21,12 +27,13 @@ def bubble_sort(tamanho, nums):
 
 
 def cocktail_sort(tamanho, nums):
+  largura = 384 // tamanho
   end = tamanho-1
   for start in range (tamanho):
     swapped = False
     for i in range (start, end):
       if (nums[i] > nums[i+1]) :
-        troca_thick(i,i+1,nums)
+        troca_thick(i,i+1,nums,largura)
         swapped=True
   
     if not swapped: break
@@ -35,7 +42,7 @@ def cocktail_sort(tamanho, nums):
     end -= 1
     for i in range(end-1, start-1,-1):
       if (nums[i] > nums[i+1]):
-        troca_thick(i,i+1,nums)
+        troca_thick(i,i+1,nums,largura)
         swapped = True
 
     if not swapped: break
@@ -221,14 +228,13 @@ def radix_sort(tamanho, nums):
 
 
 
-# def bongo_sort(tamanho, nums):
 # def odd_even_sort(tamanho, nums):
 # def bitonic_sort(tamanho, nums):
 
-sorting_algs = {1:bubble_sort, 2:cocktail_sort, 3:selection_sort, 
-                4:insertion_sort, 5:shell_sort, 6:quick_sort, 
-                7:merge_sort, 8:comb_sort, 9:heap_sort,
-                10:radix_sort}
+sorting_algs = [bongo_sort, bubble_sort, cocktail_sort,
+                selection_sort, insertion_sort, shell_sort, 
+                quick_sort, merge_sort, comb_sort, 
+                heap_sort, radix_sort]
 
 def sort(alg, tamanho, nums):
   sorting_alg = sorting_algs[alg]
