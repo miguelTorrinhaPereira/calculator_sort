@@ -148,7 +148,7 @@ def merge_sort(tamanho, nums):
         j += 1
     
     for n in range(l,r+1):
-      substitui(n, n-l, nums, aux)
+      substitui(n, aux[n-l], nums)
 
   def sort(l,r):
     if r-l+1 >= 2:
