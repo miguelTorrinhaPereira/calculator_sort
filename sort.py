@@ -4,7 +4,7 @@ from algs import sort  # os algoritmos de ordenacao
 
 
 # larguras comtem a largura das barras que representam os numeros para cada algoritmo
-larguras = [76, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+larguras = [76, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4]
 base_shuffels = 3072
 
 alg = int(input('alg? '))

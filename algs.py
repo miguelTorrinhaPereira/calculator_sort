@@ -23,6 +23,7 @@ def bogo_sort(tamanho, nums):
     shuffel(tamanho, 40, aux)
     for i in range(tamanho):
       substitui_thick(i, aux[i], nums, largura, False)
+    show_screen()
 
   largura = 384 // tamanho  
   swapped = True
@@ -33,8 +34,8 @@ def bogo_sort(tamanho, nums):
         swapped = True
         break
     
-    if not swapped: break
-    else: randomize()
+    if swapped: 
+      randomize()
 
 
 
@@ -252,6 +253,7 @@ def radix_sort(tamanho, nums):
     exp *= 10
 
 
+
 def exchange_sort(tamanho, nums):
   for i in range(tamanho-1):
     for j in range(i+1,tamanho):
@@ -259,13 +261,32 @@ def exchange_sort(tamanho, nums):
         troca_norm(i, j, nums)
 
 
-# def odd_even_sort(tamanho, nums):
+
+def odd_even_sort(tamanho, nums):
+
+  def aux_sort(start):
+    swapped = False
+    for i in range(start, tamanho-1, 2):
+      if nums[i] > nums[i+1]:
+        troca_thick(i, i+1, nums, largura)
+        swapped = True
+    return swapped
+
+  largura = 384 // tamanho
+  swapped = True
+  while swapped:
+    swapped = False
+    swapped = aux_sort(0)
+    swapped = aux_sort(1)
+
+
 # def bitonic_sort(tamanho, nums):
 
 sorting_algs = [bogo_sort, bubble_sort, cocktail_sort,
                 selection_sort, insertion_sort, shell_sort, 
                 quick_sort, merge_sort, comb_sort, 
-                heap_sort, radix_sort, exchange_sort]
+                heap_sort, radix_sort, exchange_sort,
+                odd_even_sort]
 
 def sort(alg, tamanho, nums):
   sorting_alg = sorting_algs[alg]
