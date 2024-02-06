@@ -96,7 +96,7 @@ def insertion_sort(tamanho, nums):
         for y in vertical_range(nums[j], nums[j+1]):
           set_pixel(j+1,y,branco)
       else:
-        for y in vertical_range(key, nums[i]):
+        for y in vertical_range(key, nums[j]):
           set_pixel(i,y)
       show_screen()
 
@@ -280,13 +280,52 @@ def odd_even_sort(tamanho, nums):
     swapped = aux_sort(1)
 
 
+
+def cycle_sort(tamanho, nums):
+
+  def cycle(start):
+    value = nums[start]
+    pos = start
+
+    for i in range(start+1, tamanho):
+      if nums[i] < value:
+        pos += 1
+
+    if pos == start: return
+
+    while nums[pos] == value:
+      pos += 1
+
+    old_value = value
+    value = nums[pos]
+    substitui_norm(pos, old_value, nums)
+
+    while pos != start:
+      pos = start
+
+      for i in range(start+1, tamanho):
+        if nums[i] < value:
+          pos += 1
+
+      while nums[pos] == value:
+        pos += 1
+
+      old_value = value
+      value = nums[pos]
+      substitui_norm(pos, old_value, nums)
+  
+
+  for start in range(tamanho-1):
+    cycle(start)
+
+
 # def bitonic_sort(tamanho, nums):
 
 sorting_algs = [bogo_sort, bubble_sort, cocktail_sort,
                 selection_sort, insertion_sort, shell_sort, 
                 quick_sort, merge_sort, comb_sort, 
                 heap_sort, radix_sort, exchange_sort,
-                odd_even_sort]
+                odd_even_sort, cycle_sort]
 
 def sort(alg, tamanho, nums):
   sorting_alg = sorting_algs[alg]
