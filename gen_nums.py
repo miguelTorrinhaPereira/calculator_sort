@@ -1,6 +1,7 @@
 from random import randint
 
 
+
 def gen_nums_raw(tamanho):
   if tamanho == 384:
     nums = []

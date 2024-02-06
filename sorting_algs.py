@@ -1,10 +1,18 @@
-from algs_base import *
+from casioplot import set_pixel, show_screen  # alguns algoritmos precissam de desenhar de formas especificas por questões de performance
+from drawlib import vertical_range, troca_norm, troca_thick, substitui
+from values import branco
 
 
 
 selection_espera = 10
 quick_espera = 6
 comb_espera = 6
+
+
+
+def espera(n):
+  for i in range(n*100):
+    i += 1
 
 
 
@@ -67,10 +75,10 @@ def insertion_sort(tamanho, nums):
     j = i-1
     while nums[j] > key and j >= 0:
       if j+1 != i:
-        for y in range(profundidade-nums[j+1],profundidade-nums[j]):
+        for y in vertical_range(nums[j], nums[j+1]):
           set_pixel(j+1,y,branco)
       else:
-        for y in range(profundidade-nums[j],profundidade-key):
+        for y in vertical_range(key, nums[i]):
           set_pixel(i,y)
       show_screen()
 
@@ -78,7 +86,7 @@ def insertion_sort(tamanho, nums):
       j -= 1
 
     j += 1
-    for y in range(profundidade-nums[j],profundidade-key):
+    for y in vertical_range(key, nums[j]):
       set_pixel(j,y,branco)
     show_screen()
     nums[j] = key

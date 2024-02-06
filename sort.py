@@ -1,6 +1,6 @@
 from values import larguras, base_shuffels
 from gen_nums import gen_nums  # cria a lista de numero 
-from draw import draw  # desenha a lista no inicio
+from drawlib import draw  # desenha a lista no inicio
 from sorting_algs import sort  # os algoritmos de ordenacao
 
 
