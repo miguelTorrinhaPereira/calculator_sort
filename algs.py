@@ -252,6 +252,12 @@ def radix_sort(tamanho, nums):
     exp *= 10
 
 
+def exchange_sort(tamanho, nums):
+  for i in range(tamanho-1):
+    for j in range(i+1,tamanho):
+      if nums[i] > nums[j]:
+        troca_norm(i, j, nums)
+
 
 # def odd_even_sort(tamanho, nums):
 # def bitonic_sort(tamanho, nums):
@@ -259,7 +265,7 @@ def radix_sort(tamanho, nums):
 sorting_algs = [bogo_sort, bubble_sort, cocktail_sort,
                 selection_sort, insertion_sort, shell_sort, 
                 quick_sort, merge_sort, comb_sort, 
-                heap_sort, radix_sort]
+                heap_sort, radix_sort, exchange_sort]
 
 def sort(alg, tamanho, nums):
   sorting_alg = sorting_algs[alg]

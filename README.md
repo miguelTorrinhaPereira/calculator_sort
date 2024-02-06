@@ -6,6 +6,7 @@ This program is meant to run on the CASIO fx-CG50 calculator. The purpose of thi
 
 There are several different algorithms that you can choose. Initially, the program asks you to input a number corresponding to a particular algorithm:
 
+- 0 - Bogo sort
 - 1 - Bubble sort
 - 2 - Cocktail sort
 - 3 - Selection sort
@@ -16,6 +17,7 @@ There are several different algorithms that you can choose. Initially, the progr
 - 8 - Comb sort
 - 9 - Heap sort
 - 10 - Radix sort
+- 11 - Exchange sort
 
 ## modes
 
