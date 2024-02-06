@@ -1,11 +1,12 @@
 from drawlib import vertical_range, troca_norm, troca_thick, substitui_norm, substitui_thick
-from drawlib import set_pixel, show_screen, branco  # alguns algoritmos precissam de desenhar de formas especificas por questões de performance
+from drawlib import set_pixel, show_screen, branco  # alguns algoritmos precissam de desenhar de formas especificas por questoes de performance
 from gen_nums import shuffel  # bogo_sort
 
 
 selection_espera = 10
 quick_espera = 6
 comb_espera = 6
+cycle_espera = 20
 
 
 
@@ -283,15 +284,15 @@ def odd_even_sort(tamanho, nums):
 
 def cycle_sort(tamanho, nums):
 
-  def cycle(start):
-    value = nums[start]
+  def cycle(start, value, check):
     pos = start
 
     for i in range(start+1, tamanho):
       if nums[i] < value:
         pos += 1
 
-    if pos == start: return
+    if check and pos == start: 
+      return pos, start
 
     while nums[pos] == value:
       pos += 1
@@ -299,24 +300,17 @@ def cycle_sort(tamanho, nums):
     old_value = value
     value = nums[pos]
     substitui_norm(pos, old_value, nums)
+    espera(cycle_espera)
 
-    while pos != start:
-      pos = start
-
-      for i in range(start+1, tamanho):
-        if nums[i] < value:
-          pos += 1
-
-      while nums[pos] == value:
-        pos += 1
-
-      old_value = value
-      value = nums[pos]
-      substitui_norm(pos, old_value, nums)
+    return pos, value
   
 
   for start in range(tamanho-1):
-    cycle(start)
+    pos, value = cycle(start, nums[start], True)
+    while pos != start:
+      pos, value = cycle(start, value, False)
+
+    
 
 
 # def bitonic_sort(tamanho, nums):
