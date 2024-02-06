@@ -54,12 +54,29 @@ def troca_thick(n1, n2, nums, largura):
   show_screen()
 
 
-def substitui(n1, new, nums):
-  if nums[n1] < new:
-    for y in vertical_range(nums[n1], new):
-      set_pixel(n1,y)
+def substitui_norm(n, new, nums):
+  if nums[n] < new:
+    for y in vertical_range(nums[n], new):
+      set_pixel(n,y)
   else:
-    for y in vertical_range(new, nums[n1]):
-      set_pixel(n1,y,branco)
+    for y in vertical_range(new, nums[n]):
+      set_pixel(n,y,branco)
   show_screen()
-  nums[n1] = new 
+  nums[n] = new 
+  
+
+def substitui_thick(n, new, nums, largura, show = True):
+  old = nums[n]
+  nums[n] = new
+  n *= largura
+  if old < new:
+    for y in vertical_range(old, new):
+      for x in range(largura):
+        set_pixel(n+x,y)
+  else:
+    for y in vertical_range(new, old):
+      for x in range(largura):
+        set_pixel(n+x,y,branco)
+        
+  if show:
+    show_screen()

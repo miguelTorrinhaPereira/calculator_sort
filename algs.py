@@ -1,6 +1,6 @@
-from drawlib import vertical_range, troca_norm, troca_thick, substitui
+from drawlib import vertical_range, troca_norm, troca_thick, substitui_norm, substitui_thick
 from drawlib import set_pixel, show_screen, branco  # alguns algoritmos precissam de desenhar de formas especificas por questões de performance
-
+from gen_nums import shuffel  # bogo_sort
 
 
 selection_espera = 10
@@ -15,9 +15,27 @@ def espera(n):
 
 
 
-def bongo_sort(tamanho, nums):
-  largura = 384 // tamanho
-  pass
+def bogo_sort(tamanho, nums):
+
+  def randomize():
+    aux = []
+    aux.extend(nums)
+    shuffel(tamanho, 40, aux)
+    for i in range(tamanho):
+      substitui_thick(i, aux[i], nums, largura, False)
+
+  largura = 384 // tamanho  
+  swapped = True
+  while swapped:
+    swapped = False
+    for i in range(tamanho-1):
+      if (nums[i] > nums[i+1]):
+        swapped = True
+        break
+    
+    if not swapped: break
+    else: randomize()
+
 
 
 def bubble_sort(tamanho, nums):
@@ -147,7 +165,7 @@ def merge_sort(tamanho, nums):
         j += 1
     
     for n in range(l,r+1):
-      substitui(n, aux[n-l], nums)
+      substitui_norm(n, aux[n-l], nums)
 
   def sort(l,r):
     if r-l+1 >= 2:
@@ -225,7 +243,7 @@ def radix_sort(tamanho, nums):
       count[index] += 1
    
     for i in range(0,tamanho): 
-      substitui(i, aux[i], nums)
+      substitui_norm(i, aux[i], nums)
  
 
   exp = 1
@@ -238,7 +256,7 @@ def radix_sort(tamanho, nums):
 # def odd_even_sort(tamanho, nums):
 # def bitonic_sort(tamanho, nums):
 
-sorting_algs = [bongo_sort, bubble_sort, cocktail_sort,
+sorting_algs = [bogo_sort, bubble_sort, cocktail_sort,
                 selection_sort, insertion_sort, shell_sort, 
                 quick_sort, merge_sort, comb_sort, 
                 heap_sort, radix_sort]
