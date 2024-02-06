@@ -1,6 +1,5 @@
-from casioplot import set_pixel, show_screen  # alguns algoritmos precissam de desenhar de formas especificas por questões de performance
 from drawlib import vertical_range, troca_norm, troca_thick, substitui
-from values import branco
+from drawlib import set_pixel, show_screen, branco  # alguns algoritmos precissam de desenhar de formas especificas por questões de performance
 
 
 

@@ -1,6 +1,9 @@
 from casioplot import set_pixel, show_screen
-from values import profundidade, branco
 
+
+
+profundidade = 192
+branco = (255,255,255)
 
 
 def vertical_range(baixo, cima):
