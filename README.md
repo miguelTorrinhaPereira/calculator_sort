@@ -25,7 +25,9 @@ There are several different algorithms that you can choose. Initially, the progr
 
 After selecting the algorithm, you need to choose the mode. The mode represents the initial conditions of the list of numbers to be sorted:
 
-- 1 or '' - numbers from 1 to 192 evenly distributed and shuffled
-- 2 - numbers from 1 to 192 randomly distributed
-- 3 - numbers from 1 to 192 evenly distributed and sorted in reverse order
-- 4 - numbers from 1 to 192 evenly distributed and sorted
+- 1 or '' - numbers evenly distributed and shuffled
+- 2 - numbers randomly distributed and shuffled
+- 3 - sorted in reverse order
+- 4 - sorted
+- 5 - nearly sorted
+- 6 - few uniq
