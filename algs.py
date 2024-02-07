@@ -1,8 +1,9 @@
-from drawlib import vertical_range, troca_norm, troca_thick, substitui_norm, substitui_thick
-from drawlib import set_pixel, show_screen, branco  # alguns algoritmos precissam de desenhar de formas especificas por questoes de performance
+from drawlib import vertical_range, troca, substitui
+from drawlib import set_pixel, show_screen, branco  # alguns algoritmos precissam de desenhar de formas especificas por questoes de performance, insertino_sort
 from gen_nums import shuffel  # bogo_sort
 
 
+# os algoritmos mais rapidos sao atrazados
 selection_espera = 10
 quick_espera = 6
 comb_espera = 6
@@ -23,7 +24,7 @@ def bogo_sort(tamanho, nums):
     aux.extend(nums)
     shuffel(tamanho, 40, aux)
     for i in range(tamanho):
-      substitui_thick(i, aux[i], nums, largura, False)
+      substitui(i, aux[i], nums, largura, False)
     show_screen()
 
   largura = 384 // tamanho  
@@ -46,7 +47,7 @@ def bubble_sort(tamanho, nums):
     swapped = False
     for i in range(tamanho-j-1):
       if nums[i]>nums[i+1]:
-        troca_thick(i,i+1,nums,largura)
+        troca(i,i+1,nums,largura)
         swapped = True
 
     if not swapped: break 
@@ -60,7 +61,7 @@ def cocktail_sort(tamanho, nums):
     swapped = False
     for i in range (start, end):
       if (nums[i] > nums[i+1]) :
-        troca_thick(i,i+1,nums,largura)
+        troca(i,i+1,nums,largura)
         swapped=True
   
     if not swapped: break
@@ -69,7 +70,7 @@ def cocktail_sort(tamanho, nums):
     end -= 1
     for i in range(end-1, start-1,-1):
       if (nums[i] > nums[i+1]):
-        troca_thick(i,i+1,nums,largura)
+        troca(i,i+1,nums,largura)
         swapped = True
 
     if not swapped: break
@@ -83,7 +84,7 @@ def selection_sort(tamanho, nums):
       if nums[idx] < nums[min_idx]:
         min_idx = idx
 
-    troca_norm(i,min_idx,nums)
+    troca(i,min_idx,nums)
     espera(selection_espera)
 
 
@@ -105,10 +106,7 @@ def insertion_sort(tamanho, nums):
       j -= 1
 
     j += 1
-    for y in vertical_range(key, nums[j]):
-      set_pixel(j,y,branco)
-    show_screen()
-    nums[j] = key
+    substitui(j, key, nums)
 
 
 
@@ -120,7 +118,7 @@ def shell_sort(tamanho, nums):
       i = j - gap 
       while i >= 0: 
         if  nums[i] <= nums[i+gap]: break
-        else: troca_norm(i,i+gap,nums)
+        else: troca(i,i+gap,nums)
 
         i -= gap  
       j += 1
@@ -137,9 +135,9 @@ def quick_sort(tamanho, nums):
     for j in range(low, high):
         if nums[j] <= pivot:
           i += 1
-          troca_norm(i,j,nums)
+          troca(i,j,nums)
           espera(quick_espera)
-    troca_norm(i+1,high,nums)
+    troca(i+1,high,nums)
 
     return i + 1
 
@@ -167,7 +165,7 @@ def merge_sort(tamanho, nums):
         j += 1
     
     for n in range(l,r+1):
-      substitui_norm(n, aux[n-l], nums)
+      substitui(n, aux[n-l], nums)
 
   def sort(l,r):
     if r-l+1 >= 2:
@@ -191,7 +189,7 @@ def comb_sort(tamanho, nums):
 
     for i in range(tamanho-gap):
       if nums[i] > nums[i+gap]:
-        troca_norm(i, i+gap, nums)
+        troca(i, i+gap, nums)
         swapped = True
         espera(comb_espera)
 
@@ -210,7 +208,7 @@ def heap_sort(tamanho, nums):
       largest = right
 
     if largest != i:
-      troca_norm(largest, i, nums)
+      troca(largest, i, nums)
       heapify(tamanho, nums, largest)
  
 
@@ -218,7 +216,7 @@ def heap_sort(tamanho, nums):
     heapify(tamanho, nums, i)
 
   for i in range(tamanho-1, 0, -1):
-    troca_norm(0, i, nums)
+    troca(0, i, nums)
     heapify(i, nums, 0)
 
 
@@ -245,7 +243,7 @@ def radix_sort(tamanho, nums):
       count[index] += 1
    
     for i in range(0,tamanho): 
-      substitui_norm(i, aux[i], nums)
+      substitui(i, aux[i], nums)
  
 
   exp = 1
@@ -259,7 +257,7 @@ def exchange_sort(tamanho, nums):
   for i in range(tamanho-1):
     for j in range(i+1,tamanho):
       if nums[i] > nums[j]:
-        troca_norm(i, j, nums)
+        troca(i, j, nums)
 
 
 
@@ -269,7 +267,7 @@ def odd_even_sort(tamanho, nums):
     swapped = False
     for i in range(start, tamanho-1, 2):
       if nums[i] > nums[i+1]:
-        troca_thick(i, i+1, nums, largura)
+        troca(i, i+1, nums, largura)
         swapped = True
     return swapped
 
@@ -299,7 +297,7 @@ def cycle_sort(tamanho, nums):
 
     old_value = value
     value = nums[pos]
-    substitui_norm(pos, old_value, nums)
+    substitui(pos, old_value, nums)
     espera(cycle_espera)
 
     return pos, value
