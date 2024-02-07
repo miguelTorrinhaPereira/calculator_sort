@@ -18,6 +18,8 @@ There are several different algorithms that you can choose. Initially, the progr
 - 9 - Heap sort
 - 10 - Radix sort
 - 11 - Exchange sort
+- 12 - Odd Even sort
+- 13 - Cycle sort
 
 ## modes
 
