@@ -8,12 +8,17 @@ selection_espera = 10
 quick_espera = 6
 comb_espera = 6
 cycle_espera = 20
+circle_espera = 6
 
 
 
 def espera(n):
   for i in range(n*100):
     i += 1
+
+
+def calc_largura(tamanho):
+  return 384 // tamanho  # 384 eh o maximo de numeros que podem existir
 
 
 
@@ -27,7 +32,7 @@ def bogo_sort(tamanho, nums):
       substitui(i, aux[i], nums, largura, False)
     show_screen()
 
-  largura = 384 // tamanho  
+  largura = calc_largura(tamanho)
   swapped = True
   while swapped:
     swapped = False
@@ -42,7 +47,7 @@ def bogo_sort(tamanho, nums):
 
 
 def bubble_sort(tamanho, nums):
-  largura = 384 // tamanho
+  largura = calc_largura(tamanho)
   for j in range(tamanho):
     swapped = False
     for i in range(tamanho-j-1):
@@ -55,7 +60,7 @@ def bubble_sort(tamanho, nums):
 
 
 def cocktail_sort(tamanho, nums):
-  largura = 384 // tamanho
+  largura = calc_largura(tamanho)
   end = tamanho-1
   for start in range (tamanho):
     swapped = False
@@ -78,18 +83,20 @@ def cocktail_sort(tamanho, nums):
 
 
 def selection_sort(tamanho, nums):
+  largura = calc_largura(tamanho)
   for i in range(tamanho-1):
     min_idx = i
     for idx in range(i + 1, tamanho):
       if nums[idx] < nums[min_idx]:
         min_idx = idx
 
-    troca(i,min_idx,nums)
+    troca(i,min_idx,nums, largura)
     espera(selection_espera)
 
 
 
 def insertion_sort(tamanho, nums):
+  largura = calc_largura(tamanho)
   for i in range(1, tamanho):
     key = nums[i]
     j = i-1
@@ -106,11 +113,12 @@ def insertion_sort(tamanho, nums):
       j -= 1
 
     j += 1
-    substitui(j, key, nums)
+    substitui(j, key, nums, largura)
 
 
 
 def shell_sort(tamanho, nums): 
+  largura = calc_largura(tamanho)
   gap = tamanho//2
   while gap > 0: 
     j = gap 
@@ -118,7 +126,7 @@ def shell_sort(tamanho, nums):
       i = j - gap 
       while i >= 0: 
         if  nums[i] <= nums[i+gap]: break
-        else: troca(i,i+gap,nums)
+        else: troca(i,i+gap,nums, largura)
 
         i -= gap  
       j += 1
@@ -135,9 +143,9 @@ def quick_sort(tamanho, nums):
     for j in range(low, high):
         if nums[j] <= pivot:
           i += 1
-          troca(i,j,nums)
+          troca(i,j,nums, largura)
           espera(quick_espera)
-    troca(i+1,high,nums)
+    troca(i+1,high,nums, largura)
 
     return i + 1
 
@@ -147,6 +155,7 @@ def quick_sort(tamanho, nums):
       sort(low, pi - 1)
       sort(pi + 1, high)
   
+  largura = calc_largura(tamanho)
   sort(0,tamanho-1)
 
 
@@ -165,7 +174,7 @@ def merge_sort(tamanho, nums):
         j += 1
     
     for n in range(l,r+1):
-      substitui(n, aux[n-l], nums)
+      substitui(n, aux[n-l], nums, largura)
 
   def sort(l,r):
     if r-l+1 >= 2:
@@ -174,11 +183,13 @@ def merge_sort(tamanho, nums):
       sort(m+1,r) 
       merge(l,m,r)
 
+  largura = calc_largura(tamanho)
   sort(0,tamanho-1)
 
 
 
 def comb_sort(tamanho, nums):
+  largura = calc_largura(tamanho)
   shrink_factor = 1.3
   gap = tamanho
   swapped = True
@@ -189,7 +200,7 @@ def comb_sort(tamanho, nums):
 
     for i in range(tamanho-gap):
       if nums[i] > nums[i+gap]:
-        troca(i, i+gap, nums)
+        troca(i, i+gap, nums, largura)
         swapped = True
         espera(comb_espera)
 
@@ -208,15 +219,16 @@ def heap_sort(tamanho, nums):
       largest = right
 
     if largest != i:
-      troca(largest, i, nums)
+      troca(largest, i, nums, largura)
       heapify(tamanho, nums, largest)
  
+  largura = calc_largura(tamanho)
 
   for i in range(tamanho // 2, -1, -1):
     heapify(tamanho, nums, i)
 
   for i in range(tamanho-1, 0, -1):
-    troca(0, i, nums)
+    troca(0, i, nums, largura)
     heapify(i, nums, 0)
 
 
@@ -243,9 +255,9 @@ def radix_sort(tamanho, nums):
       count[index] += 1
    
     for i in range(0,tamanho): 
-      substitui(i, aux[i], nums)
+      substitui(i, aux[i], nums, largura)
  
-
+  largura = calc_largura(tamanho)
   exp = 1
   while 192 // exp > 0:
     counting_sort(tamanho, nums, exp)
@@ -254,10 +266,11 @@ def radix_sort(tamanho, nums):
 
 
 def exchange_sort(tamanho, nums):
+  largura = calc_largura(tamanho)
   for i in range(tamanho-1):
     for j in range(i+1,tamanho):
       if nums[i] > nums[j]:
-        troca(i, j, nums)
+        troca(i, j, nums, largura)
 
 
 
@@ -271,7 +284,7 @@ def odd_even_sort(tamanho, nums):
         swapped = True
     return swapped
 
-  largura = 384 // tamanho
+  largura = calc_largura(tamanho)
   swapped = True
   while swapped:
     swapped = False
@@ -297,18 +310,51 @@ def cycle_sort(tamanho, nums):
 
     old_value = value
     value = nums[pos]
-    substitui(pos, old_value, nums)
+    substitui(pos, old_value, nums, largura)
     espera(cycle_espera)
 
     return pos, value
   
-
+  largura = calc_largura(tamanho)
   for start in range(tamanho-1):
     pos, value = cycle(start, nums[start], True)
     while pos != start:
       pos, value = cycle(start, value, False)
 
     
+
+ 
+def circle_sort(tamanho, nums):
+
+  def circle(low, high):
+    if (low == high):
+      return False
+
+    swapped = False
+    i, j = low, high
+
+    while (i < j):
+      if (nums[i] > nums[j]):
+        troca(i, j, nums, largura)
+        espera(circle_espera)
+        swapped = True
+      i += 1
+      j -= 1
+
+    if (i == j and nums[i] > nums[j + 1]):  # se tamanho for impar
+      troca(i, j+1, nums, largura)
+      espera(circle_espera)
+      swapped = True
+
+    mid = (high - low) // 2
+    first_half = circle(low, low+mid)
+    second_half = circle(low+mid+1, high)
+    return swapped or first_half or second_half
+
+  largura = calc_largura(tamanho)
+  while (circle(0, tamanho-1)):
+    pass
+
 
 
 # def bitonic_sort(tamanho, nums):
@@ -317,7 +363,7 @@ sorting_algs = [bogo_sort, bubble_sort, cocktail_sort,
                 selection_sort, insertion_sort, shell_sort, 
                 quick_sort, merge_sort, comb_sort, 
                 heap_sort, radix_sort, exchange_sort,
-                odd_even_sort, cycle_sort]
+                odd_even_sort, cycle_sort, circle_sort]
 
 def sort(alg, tamanho, nums):
   sorting_alg = sorting_algs[alg]

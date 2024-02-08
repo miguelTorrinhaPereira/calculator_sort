@@ -20,7 +20,7 @@ def draw(tamanho, nums, largura):
     show_screen()    
 
 
-def troca(n1, n2, nums, largura = 1):
+def troca(n1, n2, nums, largura):
   nums[n1],nums[n2] = nums[n2],nums[n1]
   n1 *= largura
   n2 *= largura
@@ -31,7 +31,7 @@ def troca(n1, n2, nums, largura = 1):
   show_screen()
   
 
-def substitui(n, new, nums, largura = 1, show = True):  # bogo_sort looks better with show = False
+def substitui(n, new, nums, largura, show = True):  # bogo_sort looks better with show = False
   old = nums[n]
   nums[n] = new
   n *= largura
