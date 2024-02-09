@@ -3,14 +3,15 @@ from random import randint
 
 
 def gen_nums_raw(tamanho):
-  if tamanho == 384:
-    nums = []
-    for i in range(1,193):
-      nums += [i,i]
-    return nums
-  else:
-    spacing = (384 // tamanho) // 2
+  largura = 384 // tamanho
+  if largura % 2 == 0:
+    spacing = largura // 2
     return list(range(spacing, 193, spacing))
+  else:
+    nums = []
+    for n in range(largura, 193, largura):
+      nums += [n,n]
+    return nums
 
 
 def shuffel(tamanho, shuffels, nums):
@@ -51,7 +52,7 @@ def gen_nums_nearly(tamanho, shuffels):
   
 
 def gen_nums_fewuniq(tamanho, shuffels):
-  factor = 32 
+  factor = 24 
   largura = 384 // tamanho
   if  largura > factor:  # para não dar erro com o bogo_sort
     nums =  [192, 128, 128, 64, 64]

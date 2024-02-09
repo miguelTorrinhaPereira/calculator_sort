@@ -5,10 +5,11 @@ from gen_nums import shuffel  # bogo_sort
 
 # os algoritmos mais rapidos sao atrazados
 selection_espera = 10
-quick_espera = 6
+quick_espera = 4
 comb_espera = 6
 cycle_espera = 20
 circle_espera = 6
+bitonic_espera = 10
 
 
 
@@ -141,10 +142,10 @@ def quick_sort(tamanho, nums):
     i = low - 1
 
     for j in range(low, high):
-        if nums[j] <= pivot:
-          i += 1
-          troca(i,j,nums, largura)
-          espera(quick_espera)
+      if nums[j] <= pivot:
+        i += 1
+        troca(i,j,nums, largura)
+        espera(quick_espera)
     troca(i+1,high,nums, largura)
 
     return i + 1
@@ -357,13 +358,45 @@ def circle_sort(tamanho, nums):
 
 
 
-# def bitonic_sort(tamanho, nums):
+def bitonic_sort(tamanho, nums):
+  
+  def merge(low, cnt, dire):
+    if cnt <= 1: return 
+
+    k = cnt//2
+    for i in range(low , low+k):
+      if dire == 1 and nums[i] > nums[i+k]:
+        troca(i,i+k,nums,largura)
+        espera(bitonic_espera)
+      elif dire == 0 and nums[i] < nums[i+k]:
+        troca(i+k,i,nums,largura)
+        espera(bitonic_espera)
+
+    merge(low, k, dire)
+    merge(low+k, k, dire)
+  
+  def sort(low, cnt,dire):
+    if cnt <= 1: return
+
+    k = cnt//2
+    sort(low, k, 1)
+    sort(low+k, k, 0)
+    merge(low, cnt, dire)
+ 
+  largura = calc_largura(tamanho)
+  sort(0, tamanho, 1)
+
+
+# def gravity_sort(tamanho, nums):
+# def pairwise_sort(tamanho, nums)
+# def odd_even_merge_sort(tamanho, nums):
 
 sorting_algs = [bogo_sort, bubble_sort, cocktail_sort,
                 selection_sort, insertion_sort, shell_sort, 
                 quick_sort, merge_sort, comb_sort, 
                 heap_sort, radix_sort, exchange_sort,
-                odd_even_sort, cycle_sort, circle_sort]
+                odd_even_sort, cycle_sort, circle_sort,
+                bitonic_sort]
 
 def sort(alg, tamanho, nums):
   sorting_alg = sorting_algs[alg]
