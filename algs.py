@@ -9,7 +9,7 @@ quick_espera = 4
 comb_espera = 6
 cycle_espera = 20
 circle_espera = 6
-bitonic_espera = 10
+bitonic_espera = 8
 
 
 
@@ -28,7 +28,7 @@ def bogo_sort(tamanho, nums):
   def randomize():
     aux = []
     aux.extend(nums)
-    shuffel(tamanho, 40, aux)
+    shuffel(tamanho, aux)
     for i in range(tamanho):
       substitui(i, aux[i], nums, largura, False)
     show_screen()
@@ -398,6 +398,6 @@ sorting_algs = [bogo_sort, bubble_sort, cocktail_sort,
                 odd_even_sort, cycle_sort, circle_sort,
                 bitonic_sort]
 
-def sort(alg, tamanho, nums):
+def sort(tamanho, nums, alg):
   sorting_alg = sorting_algs[alg]
   sorting_alg(tamanho, nums)

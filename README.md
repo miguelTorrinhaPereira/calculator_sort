@@ -21,6 +21,7 @@ There are several different algorithms that you can choose. Initially, the progr
 - 12 - Odd Even sort
 - 13 - Cycle sort
 - 14 - Circle sort
+- 15 - Bitonic sort
 
 ## modes
 

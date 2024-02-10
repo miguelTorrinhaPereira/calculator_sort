@@ -14,18 +14,15 @@ def gen_nums_raw(tamanho):
     return nums
 
 
-def shuffel(tamanho, shuffels, nums):
-  for i in range(shuffels):
-    a = randint(0, tamanho-1)
-    b = randint(0, tamanho-1)
-    while b == a: # evita trocar um elemento por si mesmo, o que n  o faz nada
-      b = randint(0, tamanho-1)
-    nums[a],nums[b] = nums[b],nums[a]  
+def shuffel(tamanho, nums):
+  for i in range(tamanho-1):
+    a = randint(i, tamanho-1)
+    nums[i],nums[a] = nums[a],nums[i]  
 
 
-def gen_nums_norm(tamanho, shuffels):
+def gen_nums_norm(tamanho):
   nums = gen_nums_raw(tamanho)  
-  shuffel(tamanho, shuffels, nums) 
+  shuffel(tamanho, nums) 
   return nums 
 
 
@@ -37,38 +34,33 @@ def gen_nums_invert(tamanho):
   return gen_nums_raw(tamanho)[::-1]
   
   
-def gen_nums_nearly(tamanho, shuffels):
+def gen_nums_nearly(tamanho):
   nums = gen_nums_raw(tamanho)  
-  raio = 6
-  for i in range(shuffels):
-    a = randint(0, tamanho-1)
-    b = randint(a-raio, a+raio)
-    if b >= tamanho: 
-      b = tamanho-1
-    elif b < 0: 
-      b = 0    
-    nums[a],nums[b] = nums[b],nums[a]    
+  raio = max(12//(384//tamanho), 1)  # o 1 é para impedir que raio fique 0 
+  for i in range(tamanho-1):
+    a = min(randint(i, i+raio), tamanho-1)
+    nums[i],nums[a] = nums[a],nums[i]    
   return nums
   
 
-def gen_nums_fewuniq(tamanho, shuffels):
+def gen_nums_fewuniq(tamanho):
   factor = 24 
   largura = 384 // tamanho
   if  largura > factor:  # para não dar erro com o bogo_sort
     nums =  [192, 128, 128, 64, 64]
-    shuffel(tamanho, shuffels, nums)
+    shuffel(tamanho, nums)
     return nums
 
   factor //= largura
   nums = gen_nums_raw(tamanho//factor)
   nums = nums*factor
-  shuffel(tamanho, shuffels, nums)
+  shuffel(tamanho, nums)
   return nums
 
 
-def gen_nums(modo, tamanho, shuffels):
+def gen_nums(modo, tamanho):
   if modo in ('','1'):
-    return gen_nums_norm(tamanho, shuffels)
+    return gen_nums_norm(tamanho)
   elif modo == '2':
     return gen_nums_rand(tamanho)
   elif modo == '3':
@@ -76,6 +68,6 @@ def gen_nums(modo, tamanho, shuffels):
   elif modo == '4':
     return gen_nums_raw(tamanho)
   elif modo == '5':
-    return gen_nums_nearly(tamanho, shuffels)
+    return gen_nums_nearly(tamanho)
   elif modo == '6':
-    return gen_nums_fewuniq(tamanho, shuffels)
+    return gen_nums_fewuniq(tamanho)
