@@ -38,7 +38,9 @@ def gen_nums_nearly(tamanho):
   nums = gen_nums_raw(tamanho)  
   raio = max(12//(384//tamanho), 1)  # o 1 é para impedir que raio fique 0 
   for i in range(tamanho-1):
-    a = min(randint(i, i+raio), tamanho-1)
+    a = randint(i-raio, i+raio)
+    if a > tamanho-1: a = tamanho-1
+    elif a < 0: a = 0
     nums[i],nums[a] = nums[a],nums[i]    
   return nums
   
